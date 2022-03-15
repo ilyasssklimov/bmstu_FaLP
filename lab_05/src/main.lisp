@@ -6,12 +6,9 @@
 (defun my_reverse (lst)
   (move_to lst ()))
 
-(defun my_equal (lst1 lst2)
-  (and (= (length lst1) (length lst2)) (every #'equal lst1 lst2)))
-
 (defun palindrome (lst)
   (cond ((null (listp lst)) NIL)
-	(T (my_equal lst (my_reverse lst)))))
+	(T (equal lst (my_reverse lst)))))
 
 
 ; task 2
