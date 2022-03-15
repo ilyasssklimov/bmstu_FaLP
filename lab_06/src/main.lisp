@@ -105,11 +105,10 @@
 
 
 ; task 9
-(defun count_amount (lst len)
-  (cond ((null lst) len)
-	((listp (car lst)) (count_amount (cdr lst) (+ len (length (car lst)))))
-	(T (count_amount (cdr lst) (+ len 1)))))
-
 ; ((1 2) (3 4)) -> 4
 (defun len_list_of_list (lst)
-  (count_amount lst 0))
+  (let ((len 0))
+    (mapcar #'(lambda (x) (if (listp x)
+			      (setf len (+ len (length x)))
+			      (setf len (+ len 1)))) lst)
+    len))
