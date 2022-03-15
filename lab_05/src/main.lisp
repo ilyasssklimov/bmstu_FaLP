@@ -1,31 +1,13 @@
 ; task 1
-(defun move_to (lst result)
-  (cond ((null lst) result)
-	(T (move_to (cdr lst) (cons (car lst) result)))))
-
-(defun my_reverse (lst)
-  (move_to lst ()))
-
 (defun palindrome (lst)
   (cond ((null (listp lst)) NIL)
-	(T (equal lst (my_reverse lst)))))
+	(T (equal lst (reverse lst)))))
 
 
 ; task 2
-(defun and_list (lst)
-  (eval `(and ,@lst)))
-
-(defun my_member (element lst)
-  (cond ((equal element (car lst)) T)
-	((null lst) NIL)
-	(T (my_member element (cdr lst)))))
-
-(defun my_subsetp (lst1 lst2)
-  (and_list (mapcar #'(lambda (x) (my_member x lst2)) lst1)))
-
 (defun set_equal (lst1 lst2)
   (and (listp lst1) (listp lst2)
-       (my_subsetp lst1 lst2) (my_subsetp lst2 lst1)))
+       (subsetp lst1 lst2) (subsetp lst2 lst1)))
 
 
 ; task 3
@@ -81,7 +63,7 @@
 ; task 7
 (defun add_two_element_list (lst new_pair)
   (cond ((null (listp lst)) NIL)
-	((null (notany #'(lambda (pair) (my_equal pair new_pair)) lst)) NIL)
+	((null (notany #'(lambda (pair) (equal pair new_pair)) lst)) NIL)
 	(T (nconc lst (list new_pair)))))
 
 
@@ -104,37 +86,15 @@
 	   lst)))
 
 
-;task 9
-(defun remove_element (lst result x)
-  (cond ((null lst) result)
-	((equal (car lst) x) (append result (cdr lst)))
-	(T (remove_element (cdr lst) (append result (list (car lst))) x))))
-
-(defun my_remove (x lst)
-  (remove_element lst () x))
-
-(defun my_max (lst)
-  (let ((max NIL))
-    (mapcar #'(lambda (x)
-		(if (or (null max) (> x max))
-		    (setf max x)))
-	    lst)
-    max))
-
-(defun get_sorted_list (lst result)
-  (cond ((null lst) result)
-	(T (get_sorted_list (my_remove (my_max lst) lst) (cons (my_max lst) result)))))
-
-(defun my_sort (lst)
-  (get_sorted_list lst ()))
-
+; task 9
 (defun select_between (lst left right)
   (cond ((or (null (listp lst))
 	     (null (numberp left)) (null (numberp right))) NIL)
 	(T (if (> left right) (let ((tmp left))
 				(setf left right)
 				(setf right tmp)))
-	   (my_sort (remove NIL (mapcar #'(lambda (num)
-					    (if (and (> num left) (< num right))
-						num))
-					lst))))))
+	   (sort (remove NIL (mapcar #'(lambda (num)
+					 (if (and (> num left) (< num right)) num))
+				     lst))
+		 #'<))))
+
