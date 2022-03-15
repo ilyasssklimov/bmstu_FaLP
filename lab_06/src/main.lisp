@@ -102,8 +102,4 @@
 ; task 9
 ; ((1 2) (3 4)) -> 4
 (defun len_list_of_list (lst)
-  (let ((len 0))
-    (mapcar #'(lambda (x) (if (listp x)
-			      (setf len (+ len (length x)))
-			      (setf len (+ len 1)))) lst)
-    len))
+  (apply #'+ (mapcar #'length lst)))
