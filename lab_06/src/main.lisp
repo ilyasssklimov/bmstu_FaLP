@@ -25,12 +25,10 @@
 
 
 ; task 3
-(defun move_to (lst result)
-  (cond ((null lst) result)
-	(T (move_to (cdr lst) (cons (car lst) result)))))
-
 (defun my_reverse (lst)
-  (move_to lst ()))
+  (let ((reverse_list NIL))
+    (mapcar #'(lambda (x) (setf reverse_list (append (list x) reverse_list))) lst)
+    reverse_list))
 
 (defun palindrome (lst)
   (cond ((null (listp lst)) NIL)
@@ -41,15 +39,12 @@
   (eval `(and ,@lst)))
 
 (defun my_member (element lst)
-  (cond ((equal element (car lst)) T)
-	((null lst) NIL)
-	(T (my_member element (cdr lst)))))
-
-(defun is_belong (lst1 lst2)
-  (my_member (car lst1) lst2))
+  (let ((result NIL))
+    (mapcar #'(lambda (x) (if (equal x element) (setf result T))) lst)
+    result))  
 
 (defun my_subsetp (lst1 lst2)
-  (and_list (maplist #'(lambda (lst) (is_belong lst lst2)) lst1)))
+  (and_list (mapcar #'(lambda (x) (my_member x lst2)) lst1)))
 
 (defun set_equal (lst1 lst2)
   (and (listp lst1) (listp lst2)
@@ -62,13 +57,11 @@
 
 
 ; task 6
-(defun remove_element (lst result x)
-  (cond ((null lst) result)
-	((equal (car lst) x) (append result (cdr lst)))
-	(T (remove_element (cdr lst) (append result (list (car lst))) x))))
-
 (defun my_remove (x lst)
-  (remove_element lst () x))
+  (let ((deleted 0))
+    (remove NIL (mapcar #'(lambda (num) (if (and (= deleted 0) (equal x num))
+					    (and (setf deleted 1) NIL)
+					    num)) lst))))
 
 (defun my_max (lst)
   (let ((max NIL))
@@ -78,12 +71,14 @@
 	    lst)
     max))
 
-(defun get_sorted_list (lst result)
-  (cond ((null lst) result)
-	(T (get_sorted_list (my_remove (my_max lst) lst) (cons (my_max lst) result)))))
-
 (defun my_sort (lst)
-  (get_sorted_list lst ()))
+  (let ((copied_lst (copy-list lst))
+	(result NIL))
+    (mapcar #'(lambda (x)
+		(declare (ignore x))
+		(setf result (append (list (my_max copied_lst)) result))
+		(setf copied_lst (my_remove (my_max copied_lst) copied_lst))) lst)
+    result))
 
 (defun select_between (lst left right)
   (cond ((or (null (listp lst))
