@@ -20,11 +20,8 @@
 	((null lst) NIL)
 	(T (my_member element (cdr lst)))))
 
-(defun is_belong (lst1 lst2)
-  (my_member (car lst1) lst2))
-
 (defun my_subsetp (lst1 lst2)
-  (and_list (maplist #'(lambda (lst) (is_belong lst lst2)) lst1)))
+  (and_list (mapcar #'(lambda (x) (my_member x lst2)) lst1)))
 
 (defun set_equal (lst1 lst2)
   (and (listp lst1) (listp lst2)
