@@ -1,9 +1,7 @@
 ; task 3
 (defun last_v1 (x)
   (if (listp x)
-      (if (<= (length x) 1)
-	  (car x)
-	  (last_1 (cdr x)))
+      (last x)
       NIL))
 
 (defun last_v2 (x)
@@ -21,6 +19,12 @@
       (car (reverse x))
       NIL))
 
+(defun last_v5 (x)
+  (if (listp x)
+      (let ((last_elem NIL))
+	(mapcar #'(lambda (element) (setf last_elem element)) x)
+	(list last_elem))
+      NIL))
 
 ; task 4
 (defun except_last_v1 (x)
