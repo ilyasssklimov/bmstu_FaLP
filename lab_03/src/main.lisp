@@ -7,9 +7,7 @@
 
 ; task 2
 (defun more_than_abs (x)
-  (if (< x 0)
-      (- x 1)
-      (+ x 1)))
+  (+ x (if (< x 0) -1 1)))
 
 
 ; task 3
@@ -21,15 +19,12 @@
 
 ; task 4
 (defun first_between_two (a b c)
-  (or (and (> a b) (< a c))
-      (and (> a c) (< a b))))
+  (or (> b a c) (> c a b)))
 
 
 ; task 6
 (defun more_or_equal (a b)
-  (if (>= a b)
-      T
-      NIL))
+  (>= a b))
 
 
 ; tasl 7
@@ -51,12 +46,11 @@
   (cond ((> a b) (< a c))
 	((> a c) (< a b))))
 
-(defun first_between_two_and_or (a b c)
-  (or (and (> a b) (< a c))
-      (and (> a c) (< a b))))
+(defun first_between_two (a b c)
+  (or (> b a c) (> c a b)))
 
 
-; task 
+; task 9
 (defun how_alike (x y)
   (if (or (= x y) (equal x y))
       'the_same
