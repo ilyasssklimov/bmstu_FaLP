@@ -32,13 +32,13 @@
 ;;; task 4 (7)
 (defun mul_by_number_v1 (lst num &optional (result NIL))
   (cond ((null lst) result)
-	(T (setf (car lst) (* (car lst) num))
-	   (mul_by_number_v1 (cdr lst) num (append result (list (car lst)))))))
+	(T (mul_by_number_v1 (cdr lst) num (append result (list (* (car lst) num)))))))
 
 (defun mul_by_number_v2 (lst num &optional (result NIL))
   (cond ((null lst) result)
-	(T (if (numberp (car lst)) (setf (car lst) (* (car lst) num)))
-	   (mul_by_number_v2 (cdr lst) num (append result (list (car lst)))))))
+	((numberp (car lst))
+	 (mul_by_number_v2 (cdr lst) num (append result (list (* (car lst) num)))))
+	(T (mul_by_number_v2 (cdr lst) num (append result (list (car lst)))))))
 
 
 ;;; task 5 (8)
@@ -57,14 +57,11 @@
 (defun my_sort (lst &optional result)
   (cond ((null lst) result)
 	(T (my_sort (my_remove (my_max lst) lst)
-		    (append (list (my_max lst)) result)))))
+		    (cons (my_max lst) result)))))
 
 (defun select_between (lst left right)
-  (cond ((> left right)
-	 (setf left (+ left right))
-	 (setf right (- left right))
-	 (setf left (- left right))))
-  (my_sort (between lst () left right)))
+  (cond ((> left right) (select_between lst right left))
+	(T (select_between lst left right))))
 
 
 ;;; task 6 (8)
