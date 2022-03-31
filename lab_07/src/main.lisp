@@ -32,13 +32,13 @@
 ;;; task 4 (7)
 (defun mul_by_number_v1 (lst num &optional (result NIL))
   (cond ((null lst) result)
-	(T (mul_by_number_v1 (cdr lst) num (append result (list (* (car lst) num)))))))
+	(T (mul_by_number_v1 (cdr lst) num (cons (* (car lst) num) result)))))
 
 (defun mul_by_number_v2 (lst num &optional (result NIL))
   (cond ((null lst) result)
 	((numberp (car lst))
-	 (mul_by_number_v2 (cdr lst) num (append result (list (* (car lst) num)))))
-	(T (mul_by_number_v2 (cdr lst) num (append result (list (car lst)))))))
+	 (mul_by_number_v2 (cdr lst) num (cons (* (car lst) num) result)))
+	(T (mul_by_number_v2 (cdr lst) num (cons (car lst) result)))))
 
 
 ;;; task 5 (8)
