@@ -25,7 +25,7 @@ clauses
         person_number(Person, Number).
 
 goal
-    person_number("Ivan", X).
+    % person_number("Ivan", X).
     % person_number(X, "89324189932").
     % person_university("Ilya", X).
     % person_university(X, "BMSTU").
