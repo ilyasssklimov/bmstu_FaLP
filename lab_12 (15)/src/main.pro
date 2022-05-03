@@ -21,18 +21,30 @@ max_three_cut(_, _, C, C).
 
 
 goal
+write("max(19, 4): "),
 max_two(19, 4, Max);
+write("max(1, 5): "),
 max_two(1, 5, Max);
+write("max(1, 1): "),
 max_two(1, 1, Max);
 
+write("\nmax_cut(19, 4): "),
 max_two_cut(19, 4, Max);
+write("max_cut(1, 5): "),
 max_two_cut(1, 5, Max);
+write("max_cut(1, 1): "),
 max_two_cut(1, 1, Max);
 
+write("\nmax(9, 1, 4): "),
 max_three(9, 1, 4, Max);
+write("max(5, 10, 2): "),
 max_three(5, 10, 2, Max);
+write("max(0, 1, 20): "),
 max_three(0, 1, 20, Max);
 
+write("\nmax_cut(9, 1, 4): "),
 max_three_cut(9, 1, 4, Max);
+write("max_cut(5, 10, 2): "),
 max_three_cut(5, 10, 2, Max);
+write("max_cut(0, 1, 20): "),
 max_three_cut(0, 1, 20, Max).
