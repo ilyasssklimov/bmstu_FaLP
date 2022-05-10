@@ -3,5 +3,5 @@
 ### Lisp (лабораторные работы 1 - 7)
 `Используем Sbcl (StealBankCommonLisp)`
 
-### Prolog
+### Prolog (лабораторные работы 8 (11) - 15 (18))
 `Используем Visual Prolog 5.2`
